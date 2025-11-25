@@ -3,7 +3,7 @@ Database Setup Script for Crypto EMA Scanner
 Creates all necessary tables and indexes
 """
 
-import psycopg2
+import psycopg
 import os
 from datetime import datetime
 
@@ -13,7 +13,7 @@ def setup_database(database_url):
     print("🔧 Connecting to database...")
     
     try:
-        conn = psycopg2.connect(database_url)
+        conn = psycopg.connect(database_url)
         conn.autocommit = True
         cur = conn.cursor()
         
