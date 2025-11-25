@@ -1,0 +1,1579 @@
+{
+  "scan_date": "2025-11-24T09:17:18.392932",
+  "top_n": 10,
+  "timeframes_analyzed": [
+    "15m",
+    "30m",
+    "1h",
+    "4h",
+    "12h",
+    "1d",
+    "1w"
+  ],
+  "coins": [
+    {
+      "coin_info": {
+        "id": "bitcoin",
+        "symbol": "btc",
+        "name": "Bitcoin",
+        "image": "https://coin-images.coingecko.com/coins/images/1/large/bitcoin.png?1696501400",
+        "current_price": 86368,
+        "market_cap": 1719152320782,
+        "market_cap_rank": 1,
+        "fully_diluted_valuation": 1719152320782,
+        "total_volume": 69883676162,
+        "high_24h": 87995,
+        "low_24h": 85701,
+        "price_change_24h": 9.62,
+        "price_change_percentage_24h": 0.01114,
+        "market_cap_change_24h": -8492081801.82959,
+        "market_cap_change_percentage_24h": -0.49154,
+        "circulating_supply": 19953059.0,
+        "total_supply": 19953059.0,
+        "max_supply": 21000000.0,
+        "ath": 126080,
+        "ath_change_percentage": -31.81254,
+        "ath_date": "2025-10-06T18:57:42.558Z",
+        "atl": 67.81,
+        "atl_change_percentage": 126683.56881,
+        "atl_date": "2013-07-06T00:00:00.000Z",
+        "roi": null,
+        "last_updated": "2025-11-24T13:16:00.600Z"
+      },
+      "timeframes": {
+        "15m": {
+          "timeframe": "15m",
+          "timeframe_label": "15-Min",
+          "rank": 1,
+          "name": "Bitcoin",
+          "symbol": "BTC",
+          "binance_symbol": "BTCUSDT",
+          "current_price": 86310.01,
+          "ema50": 86583.43111086723,
+          "above_ema50": false,
+          "pct_from_ema50": -0.31578918432687764,
+          "market_cap": 1719152320782,
+          "data_source": "Binance Spot",
+          "candle_count": 200
+        },
+        "30m": {
+          "timeframe": "30m",
+          "timeframe_label": "30-Min",
+          "rank": 1,
+          "name": "Bitcoin",
+          "symbol": "BTC",
+          "binance_symbol": "BTCUSDT",
+          "current_price": 86310.01,
+          "ema50": 86594.21188344309,
+          "above_ema50": false,
+          "pct_from_ema50": -0.3281996305083672,
+          "market_cap": 1719152320782,
+          "data_source": "Binance Spot",
+          "candle_count": 200
+        },
+        "1h": {
+          "timeframe": "1h",
+          "timeframe_label": "1-Hour",
+          "rank": 1,
+          "name": "Bitcoin",
+          "symbol": "BTC",
+          "binance_symbol": "BTCUSDT",
+          "current_price": 86310.0,
+          "ema50": 86410.35395665701,
+          "above_ema50": false,
+          "pct_from_ema50": -0.11613649529470477,
+          "market_cap": 1719152320782,
+          "data_source": "Binance Spot",
+          "candle_count": 200
+        },
+        "4h": {
+          "timeframe": "4h",
+          "timeframe_label": "4-Hour",
+          "rank": 1,
+          "name": "Bitcoin",
+          "symbol": "BTC",
+          "binance_symbol": "BTCUSDT",
+          "current_price": 86310.0,
+          "ema50": 88677.07637056982,
+          "above_ema50": false,
+          "pct_from_ema50": -2.669321618901957,
+          "market_cap": 1719152320782,
+          "data_source": "Binance Spot",
+          "candle_count": 60
+        },
+        "12h": {
+          "timeframe": "12h",
+          "timeframe_label": "12-Hour",
+          "rank": 1,
+          "name": "Bitcoin",
+          "symbol": "BTC",
+          "binance_symbol": "BTCUSDT",
+          "current_price": 86310.0,
+          "ema50": 96727.47313231771,
+          "above_ema50": false,
+          "pct_from_ema50": -10.76992171403795,
+          "market_cap": 1719152320782,
+          "data_source": "Binance Spot",
+          "candle_count": 60
+        },
+        "1d": {
+          "timeframe": "1d",
+          "timeframe_label": "Daily",
+          "rank": 1,
+          "name": "Bitcoin",
+          "symbol": "BTC",
+          "binance_symbol": "BTCUSDT",
+          "current_price": 86310.0,
+          "ema50": 101895.22410047046,
+          "above_ema50": false,
+          "pct_from_ema50": -15.295343072314315,
+          "market_cap": 1719152320782,
+          "data_source": "Binance Spot",
+          "candle_count": 60
+        },
+        "1w": {
+          "timeframe": "1w",
+          "timeframe_label": "Weekly",
+          "rank": 1,
+          "name": "Bitcoin",
+          "symbol": "BTC",
+          "binance_symbol": "BTCUSDT",
+          "current_price": 86310.0,
+          "ema50": 100345.30284701838,
+          "above_ema50": false,
+          "pct_from_ema50": -13.987005319437747,
+          "market_cap": 1719152320782,
+          "data_source": "Binance Spot",
+          "candle_count": 60
+        }
+      }
+    },
+    {
+      "coin_info": {
+        "id": "ethereum",
+        "symbol": "eth",
+        "name": "Ethereum",
+        "image": "https://coin-images.coingecko.com/coins/images/279/large/ethereum.png?1696501628",
+        "current_price": 2816.77,
+        "market_cap": 339309941376,
+        "market_cap_rank": 2,
+        "fully_diluted_valuation": 339309941376,
+        "total_volume": 23419502234,
+        "high_24h": 2881.29,
+        "low_24h": 2770.21,
+        "price_change_24h": -8.1602394265351,
+        "price_change_percentage_24h": -0.28887,
+        "market_cap_change_24h": -2431624465.675659,
+        "market_cap_change_percentage_24h": -0.71154,
+        "circulating_supply": 120695639.9699993,
+        "total_supply": 120695639.9699993,
+        "max_supply": null,
+        "ath": 4946.05,
+        "ath_change_percentage": -43.30364,
+        "ath_date": "2025-08-24T19:21:03.333Z",
+        "atl": 0.432979,
+        "atl_change_percentage": 647559.64332,
+        "atl_date": "2015-10-20T00:00:00.000Z",
+        "roi": {
+          "times": 42.611407237516794,
+          "currency": "btc",
+          "percentage": 4261.14072375168
+        },
+        "last_updated": "2025-11-24T13:16:00.632Z"
+      },
+      "timeframes": {
+        "15m": {
+          "timeframe": "15m",
+          "timeframe_label": "15-Min",
+          "rank": 2,
+          "name": "Ethereum",
+          "symbol": "ETH",
+          "binance_symbol": "ETHUSDT",
+          "current_price": 2816.89,
+          "ema50": 2817.4287407332004,
+          "above_ema50": false,
+          "pct_from_ema50": -0.019121716386703843,
+          "market_cap": 339309941376,
+          "data_source": "Binance Spot",
+          "candle_count": 200
+        },
+        "30m": {
+          "timeframe": "30m",
+          "timeframe_label": "30-Min",
+          "rank": 2,
+          "name": "Ethereum",
+          "symbol": "ETH",
+          "binance_symbol": "ETHUSDT",
+          "current_price": 2816.9,
+          "ema50": 2816.1484417123825,
+          "above_ema50": true,
+          "pct_from_ema50": 0.02668745285176216,
+          "market_cap": 339309941376,
+          "data_source": "Binance Spot",
+          "candle_count": 200
+        },
+        "1h": {
+          "timeframe": "1h",
+          "timeframe_label": "1-Hour",
+          "rank": 2,
+          "name": "Ethereum",
+          "symbol": "ETH",
+          "binance_symbol": "ETHUSDT",
+          "current_price": 2816.92,
+          "ema50": 2812.1757151434563,
+          "above_ema50": true,
+          "pct_from_ema50": 0.1687051357067061,
+          "market_cap": 339309941376,
+          "data_source": "Binance Spot",
+          "candle_count": 200
+        },
+        "4h": {
+          "timeframe": "4h",
+          "timeframe_label": "4-Hour",
+          "rank": 2,
+          "name": "Ethereum",
+          "symbol": "ETH",
+          "binance_symbol": "ETHUSDT",
+          "current_price": 2816.92,
+          "ema50": 2911.885777487802,
+          "above_ema50": false,
+          "pct_from_ema50": -3.2613153380532873,
+          "market_cap": 339309941376,
+          "data_source": "Binance Spot",
+          "candle_count": 60
+        },
+        "12h": {
+          "timeframe": "12h",
+          "timeframe_label": "12-Hour",
+          "rank": 2,
+          "name": "Ethereum",
+          "symbol": "ETH",
+          "binance_symbol": "ETHUSDT",
+          "current_price": 2816.92,
+          "ema50": 3244.8459996427873,
+          "above_ema50": false,
+          "pct_from_ema50": -13.187867765986304,
+          "market_cap": 339309941376,
+          "data_source": "Binance Spot",
+          "candle_count": 60
+        },
+        "1d": {
+          "timeframe": "1d",
+          "timeframe_label": "Daily",
+          "rank": 2,
+          "name": "Ethereum",
+          "symbol": "ETH",
+          "binance_symbol": "ETHUSDT",
+          "current_price": 2816.92,
+          "ema50": 3503.7733677811625,
+          "above_ema50": false,
+          "pct_from_ema50": -19.60324757580216,
+          "market_cap": 339309941376,
+          "data_source": "Binance Spot",
+          "candle_count": 60
+        },
+        "1w": {
+          "timeframe": "1w",
+          "timeframe_label": "Weekly",
+          "rank": 2,
+          "name": "Ethereum",
+          "symbol": "ETH",
+          "binance_symbol": "ETHUSDT",
+          "current_price": 2816.92,
+          "ema50": 3279.645768809022,
+          "above_ema50": false,
+          "pct_from_ema50": -14.109016687404537,
+          "market_cap": 339309941376,
+          "data_source": "Binance Spot",
+          "candle_count": 60
+        }
+      }
+    },
+    {
+      "coin_info": {
+        "id": "tether",
+        "symbol": "usdt",
+        "name": "Tether",
+        "image": "https://coin-images.coingecko.com/coins/images/325/large/Tether.png?1696501661",
+        "current_price": 0.999692,
+        "market_cap": 184328483423,
+        "market_cap_rank": 3,
+        "fully_diluted_valuation": 189793286603,
+        "total_volume": 85338415551,
+        "high_24h": 0.999887,
+        "low_24h": 0.999534,
+        "price_change_24h": 8.898e-05,
+        "price_change_percentage_24h": 0.0089,
+        "market_cap_change_24h": -93817153.40631104,
+        "market_cap_change_percentage_24h": -0.05087,
+        "circulating_supply": 184400433039.7958,
+        "total_supply": 189867369316.4662,
+        "max_supply": null,
+        "ath": 1.32,
+        "ath_change_percentage": -24.4449,
+        "ath_date": "2018-07-24T00:00:00.000Z",
+        "atl": 0.572521,
+        "atl_change_percentage": 74.60774,
+        "atl_date": "2015-03-02T00:00:00.000Z",
+        "roi": null,
+        "last_updated": "2025-11-24T13:16:05.791Z"
+      },
+      "timeframes": {
+        "15m": null,
+        "30m": null,
+        "1h": null,
+        "4h": null,
+        "12h": null,
+        "1d": null,
+        "1w": null
+      }
+    },
+    {
+      "coin_info": {
+        "id": "ripple",
+        "symbol": "xrp",
+        "name": "XRP",
+        "image": "https://coin-images.coingecko.com/coins/images/44/large/xrp-symbol-white-128.png?1696501442",
+        "current_price": 2.09,
+        "market_cap": 124848140444,
+        "market_cap_rank": 4,
+        "fully_diluted_valuation": 207163691242,
+        "total_volume": 3802351389,
+        "high_24h": 2.1,
+        "low_24h": 2.03,
+        "price_change_24h": 0.051897,
+        "price_change_percentage_24h": 2.54645,
+        "market_cap_change_24h": 1699584804,
+        "market_cap_change_percentage_24h": 1.38011,
+        "circulating_supply": 60256871588.0,
+        "total_supply": 99985757869.0,
+        "max_supply": 100000000000.0,
+        "ath": 3.65,
+        "ath_change_percentage": -43.38943,
+        "ath_date": "2025-07-18T03:40:53.808Z",
+        "atl": 0.00268621,
+        "atl_change_percentage": 76745.7443,
+        "atl_date": "2014-05-22T00:00:00.000Z",
+        "roi": null,
+        "last_updated": "2025-11-24T13:16:05.643Z"
+      },
+      "timeframes": {
+        "15m": {
+          "timeframe": "15m",
+          "timeframe_label": "15-Min",
+          "rank": 4,
+          "name": "XRP",
+          "symbol": "XRP",
+          "binance_symbol": "XRPUSDT",
+          "current_price": 2.0854,
+          "ema50": 2.06393668307811,
+          "above_ema50": true,
+          "pct_from_ema50": 1.0399212872111916,
+          "market_cap": 124848140444,
+          "data_source": "Binance Spot",
+          "candle_count": 200
+        },
+        "30m": {
+          "timeframe": "30m",
+          "timeframe_label": "30-Min",
+          "rank": 4,
+          "name": "XRP",
+          "symbol": "XRP",
+          "binance_symbol": "XRPUSDT",
+          "current_price": 2.0854,
+          "ema50": 2.0556252408376516,
+          "above_ema50": true,
+          "pct_from_ema50": 1.4484526931677146,
+          "market_cap": 124848140444,
+          "data_source": "Binance Spot",
+          "candle_count": 200
+        },
+        "1h": {
+          "timeframe": "1h",
+          "timeframe_label": "1-Hour",
+          "rank": 4,
+          "name": "XRP",
+          "symbol": "XRP",
+          "binance_symbol": "XRPUSDT",
+          "current_price": 2.0854,
+          "ema50": 2.0377984093510833,
+          "above_ema50": true,
+          "pct_from_ema50": 2.3359322703600953,
+          "market_cap": 124848140444,
+          "data_source": "Binance Spot",
+          "candle_count": 200
+        },
+        "4h": {
+          "timeframe": "4h",
+          "timeframe_label": "4-Hour",
+          "rank": 4,
+          "name": "XRP",
+          "symbol": "XRP",
+          "binance_symbol": "XRPUSDT",
+          "current_price": 2.0853,
+          "ema50": 2.082593966679005,
+          "above_ema50": true,
+          "pct_from_ema50": 0.12993571307182503,
+          "market_cap": 124848140444,
+          "data_source": "Binance Spot",
+          "candle_count": 60
+        },
+        "12h": {
+          "timeframe": "12h",
+          "timeframe_label": "12-Hour",
+          "rank": 4,
+          "name": "XRP",
+          "symbol": "XRP",
+          "binance_symbol": "XRPUSDT",
+          "current_price": 2.0853,
+          "ema50": 2.2457655126437306,
+          "above_ema50": false,
+          "pct_from_ema50": -7.145247878298271,
+          "market_cap": 124848140444,
+          "data_source": "Binance Spot",
+          "candle_count": 60
+        },
+        "1d": {
+          "timeframe": "1d",
+          "timeframe_label": "Daily",
+          "rank": 4,
+          "name": "XRP",
+          "symbol": "XRP",
+          "binance_symbol": "XRPUSDT",
+          "current_price": 2.0854,
+          "ema50": 2.370811571338759,
+          "above_ema50": false,
+          "pct_from_ema50": -12.038559908731674,
+          "market_cap": 124848140444,
+          "data_source": "Binance Spot",
+          "candle_count": 60
+        },
+        "1w": {
+          "timeframe": "1w",
+          "timeframe_label": "Weekly",
+          "rank": 4,
+          "name": "XRP",
+          "symbol": "XRP",
+          "binance_symbol": "XRPUSDT",
+          "current_price": 2.0854,
+          "ema50": 2.3180825072525773,
+          "above_ema50": false,
+          "pct_from_ema50": -10.037714642364296,
+          "market_cap": 124848140444,
+          "data_source": "Binance Spot",
+          "candle_count": 60
+        }
+      }
+    },
+    {
+      "coin_info": {
+        "id": "binancecoin",
+        "symbol": "bnb",
+        "name": "BNB",
+        "image": "https://coin-images.coingecko.com/coins/images/825/large/bnb-icon2_2x.png?1696501970",
+        "current_price": 841.89,
+        "market_cap": 115679820241,
+        "market_cap_rank": 5,
+        "fully_diluted_valuation": 115679820241,
+        "total_volume": 1601651003,
+        "high_24h": 856.87,
+        "low_24h": 836.61,
+        "price_change_24h": -4.063019837578281,
+        "price_change_percentage_24h": -0.48029,
+        "market_cap_change_24h": -965343063.4333801,
+        "market_cap_change_percentage_24h": -0.82759,
+        "circulating_supply": 137736593.71,
+        "total_supply": 137736593.71,
+        "max_supply": 200000000.0,
+        "ath": 1369.99,
+        "ath_change_percentage": -38.83845,
+        "ath_date": "2025-10-13T08:41:24.131Z",
+        "atl": 0.0398177,
+        "atl_change_percentage": 2104261.13763,
+        "atl_date": "2017-10-19T00:00:00.000Z",
+        "roi": null,
+        "last_updated": "2025-11-24T13:16:00.837Z"
+      },
+      "timeframes": {
+        "15m": {
+          "timeframe": "15m",
+          "timeframe_label": "15-Min",
+          "rank": 5,
+          "name": "BNB",
+          "symbol": "BNB",
+          "binance_symbol": "BNBUSDT",
+          "current_price": 841.28,
+          "ema50": 845.9062849433573,
+          "above_ema50": false,
+          "pct_from_ema50": -0.5469027746574873,
+          "market_cap": 115679820241,
+          "data_source": "Binance Spot",
+          "candle_count": 200
+        },
+        "30m": {
+          "timeframe": "30m",
+          "timeframe_label": "30-Min",
+          "rank": 5,
+          "name": "BNB",
+          "symbol": "BNB",
+          "binance_symbol": "BNBUSDT",
+          "current_price": 841.28,
+          "ema50": 845.567013214885,
+          "above_ema50": false,
+          "pct_from_ema50": -0.5069986349852558,
+          "market_cap": 115679820241,
+          "data_source": "Binance Spot",
+          "candle_count": 200
+        },
+        "1h": {
+          "timeframe": "1h",
+          "timeframe_label": "1-Hour",
+          "rank": 5,
+          "name": "BNB",
+          "symbol": "BNB",
+          "binance_symbol": "BNBUSDT",
+          "current_price": 841.28,
+          "ema50": 844.8590964939822,
+          "above_ema50": false,
+          "pct_from_ema50": -0.42363235583718417,
+          "market_cap": 115679820241,
+          "data_source": "Binance Spot",
+          "candle_count": 200
+        },
+        "4h": {
+          "timeframe": "4h",
+          "timeframe_label": "4-Hour",
+          "rank": 5,
+          "name": "BNB",
+          "symbol": "BNB",
+          "binance_symbol": "BNBUSDT",
+          "current_price": 841.28,
+          "ema50": 871.1295535465525,
+          "above_ema50": false,
+          "pct_from_ema50": -3.426534368513698,
+          "market_cap": 115679820241,
+          "data_source": "Binance Spot",
+          "candle_count": 60
+        },
+        "12h": {
+          "timeframe": "12h",
+          "timeframe_label": "12-Hour",
+          "rank": 5,
+          "name": "BNB",
+          "symbol": "BNB",
+          "binance_symbol": "BNBUSDT",
+          "current_price": 841.28,
+          "ema50": 941.7162160908169,
+          "above_ema50": false,
+          "pct_from_ema50": -10.665231666896467,
+          "market_cap": 115679820241,
+          "data_source": "Binance Spot",
+          "candle_count": 60
+        },
+        "1d": {
+          "timeframe": "1d",
+          "timeframe_label": "Daily",
+          "rank": 5,
+          "name": "BNB",
+          "symbol": "BNB",
+          "binance_symbol": "BNBUSDT",
+          "current_price": 841.28,
+          "ema50": 985.9130369904043,
+          "above_ema50": false,
+          "pct_from_ema50": -14.669958866951468,
+          "market_cap": 115679820241,
+          "data_source": "Binance Spot",
+          "candle_count": 60
+        },
+        "1w": {
+          "timeframe": "1w",
+          "timeframe_label": "Weekly",
+          "rank": 5,
+          "name": "BNB",
+          "symbol": "BNB",
+          "binance_symbol": "BNBUSDT",
+          "current_price": 841.28,
+          "ema50": 811.6862358660594,
+          "above_ema50": true,
+          "pct_from_ema50": 3.6459610655297583,
+          "market_cap": 115679820241,
+          "data_source": "Binance Spot",
+          "candle_count": 60
+        }
+      }
+    },
+    {
+      "coin_info": {
+        "id": "usd-coin",
+        "symbol": "usdc",
+        "name": "USDC",
+        "image": "https://coin-images.coingecko.com/coins/images/6319/large/usdc.png?1696506694",
+        "current_price": 0.999699,
+        "market_cap": 74131736547,
+        "market_cap_rank": 6,
+        "fully_diluted_valuation": 74138664943,
+        "total_volume": 4767366856,
+        "high_24h": 0.999897,
+        "low_24h": 0.999599,
+        "price_change_24h": -2.1461685963731e-05,
+        "price_change_percentage_24h": -0.00215,
+        "market_cap_change_24h": 168317527,
+        "market_cap_change_percentage_24h": 0.22757,
+        "circulating_supply": 74153988236.13005,
+        "total_supply": 74160918711.3878,
+        "max_supply": null,
+        "ath": 1.17,
+        "ath_change_percentage": -14.75272,
+        "ath_date": "2019-05-08T00:40:28.300Z",
+        "atl": 0.877647,
+        "atl_change_percentage": 13.9069,
+        "atl_date": "2023-03-11T08:02:13.981Z",
+        "roi": null,
+        "last_updated": "2025-11-24T13:16:06.152Z"
+      },
+      "timeframes": {
+        "15m": {
+          "timeframe": "15m",
+          "timeframe_label": "15-Min",
+          "rank": 6,
+          "name": "USDC",
+          "symbol": "USDC",
+          "binance_symbol": "USDCUSDT",
+          "current_price": 1.0003,
+          "ema50": 1.0002135309492854,
+          "above_ema50": true,
+          "pct_from_ema50": 0.008645059083779372,
+          "market_cap": 74131736547,
+          "data_source": "Binance Spot",
+          "candle_count": 200
+        },
+        "30m": {
+          "timeframe": "30m",
+          "timeframe_label": "30-Min",
+          "rank": 6,
+          "name": "USDC",
+          "symbol": "USDC",
+          "binance_symbol": "USDCUSDT",
+          "current_price": 1.0002,
+          "ema50": 1.0002131313907452,
+          "above_ema50": false,
+          "pct_from_ema50": -0.0013128592630007763,
+          "market_cap": 74131736547,
+          "data_source": "Binance Spot",
+          "candle_count": 200
+        },
+        "1h": {
+          "timeframe": "1h",
+          "timeframe_label": "1-Hour",
+          "rank": 6,
+          "name": "USDC",
+          "symbol": "USDC",
+          "binance_symbol": "USDCUSDT",
+          "current_price": 1.0002,
+          "ema50": 1.0002740986703258,
+          "above_ema50": false,
+          "pct_from_ema50": -0.0074078365544321696,
+          "market_cap": 74131736547,
+          "data_source": "Binance Spot",
+          "candle_count": 200
+        },
+        "4h": {
+          "timeframe": "4h",
+          "timeframe_label": "4-Hour",
+          "rank": 6,
+          "name": "USDC",
+          "symbol": "USDC",
+          "binance_symbol": "USDCUSDT",
+          "current_price": 1.0002,
+          "ema50": 1.0004607739969007,
+          "above_ema50": false,
+          "pct_from_ema50": -0.026065389436400674,
+          "market_cap": 74131736547,
+          "data_source": "Binance Spot",
+          "candle_count": 60
+        },
+        "12h": {
+          "timeframe": "12h",
+          "timeframe_label": "12-Hour",
+          "rank": 6,
+          "name": "USDC",
+          "symbol": "USDC",
+          "binance_symbol": "USDCUSDT",
+          "current_price": 1.0002,
+          "ema50": 1.000308837021313,
+          "above_ema50": false,
+          "pct_from_ema50": -0.010880341878915666,
+          "market_cap": 74131736547,
+          "data_source": "Binance Spot",
+          "candle_count": 60
+        },
+        "1d": {
+          "timeframe": "1d",
+          "timeframe_label": "Daily",
+          "rank": 6,
+          "name": "USDC",
+          "symbol": "USDC",
+          "binance_symbol": "USDCUSDT",
+          "current_price": 1.0002,
+          "ema50": 1.0000175022596867,
+          "above_ema50": true,
+          "pct_from_ema50": 0.01824945462463745,
+          "market_cap": 74131736547,
+          "data_source": "Binance Spot",
+          "candle_count": 60
+        },
+        "1w": {
+          "timeframe": "1w",
+          "timeframe_label": "Weekly",
+          "rank": 6,
+          "name": "USDC",
+          "symbol": "USDC",
+          "binance_symbol": "USDCUSDT",
+          "current_price": 1.0002,
+          "ema50": 0.999879329200651,
+          "above_ema50": true,
+          "pct_from_ema50": 0.03207094996206213,
+          "market_cap": 74131736547,
+          "data_source": "Binance Spot",
+          "candle_count": 60
+        }
+      }
+    },
+    {
+      "coin_info": {
+        "id": "solana",
+        "symbol": "sol",
+        "name": "Solana",
+        "image": "https://coin-images.coingecko.com/coins/images/4128/large/solana.png?1718769756",
+        "current_price": 130.17,
+        "market_cap": 72535859374,
+        "market_cap_rank": 7,
+        "fully_diluted_valuation": 79737919613,
+        "total_volume": 4376160556,
+        "high_24h": 133.96,
+        "low_24h": 128.65,
+        "price_change_24h": -0.5011737950115958,
+        "price_change_percentage_24h": -0.38355,
+        "market_cap_change_24h": -720361842.783493,
+        "market_cap_change_percentage_24h": -0.98335,
+        "circulating_supply": 559138688.7384981,
+        "total_supply": 614655374.5954466,
+        "max_supply": null,
+        "ath": 293.31,
+        "ath_change_percentage": -55.8277,
+        "ath_date": "2025-01-19T11:15:27.957Z",
+        "atl": 0.500801,
+        "atl_change_percentage": 25771.0716,
+        "atl_date": "2020-05-11T19:35:23.449Z",
+        "roi": null,
+        "last_updated": "2025-11-24T13:16:05.582Z"
+      },
+      "timeframes": {
+        "15m": {
+          "timeframe": "15m",
+          "timeframe_label": "15-Min",
+          "rank": 7,
+          "name": "Solana",
+          "symbol": "SOL",
+          "binance_symbol": "SOLUSDT",
+          "current_price": 130.13,
+          "ema50": 130.44907732382913,
+          "above_ema50": false,
+          "pct_from_ema50": -0.2445991419602386,
+          "market_cap": 72535859374,
+          "data_source": "Binance Spot",
+          "candle_count": 200
+        },
+        "30m": {
+          "timeframe": "30m",
+          "timeframe_label": "30-Min",
+          "rank": 7,
+          "name": "Solana",
+          "symbol": "SOL",
+          "binance_symbol": "SOLUSDT",
+          "current_price": 130.13,
+          "ema50": 130.65520756963275,
+          "above_ema50": false,
+          "pct_from_ema50": -0.4019798210896765,
+          "market_cap": 72535859374,
+          "data_source": "Binance Spot",
+          "candle_count": 200
+        },
+        "1h": {
+          "timeframe": "1h",
+          "timeframe_label": "1-Hour",
+          "rank": 7,
+          "name": "Solana",
+          "symbol": "SOL",
+          "binance_symbol": "SOLUSDT",
+          "current_price": 130.13,
+          "ema50": 130.50228546132857,
+          "above_ema50": false,
+          "pct_from_ema50": -0.2852712195901671,
+          "market_cap": 72535859374,
+          "data_source": "Binance Spot",
+          "candle_count": 200
+        },
+        "4h": {
+          "timeframe": "4h",
+          "timeframe_label": "4-Hour",
+          "rank": 7,
+          "name": "Solana",
+          "symbol": "SOL",
+          "binance_symbol": "SOLUSDT",
+          "current_price": 130.13,
+          "ema50": 133.5337840801814,
+          "above_ema50": false,
+          "pct_from_ema50": -2.5490059340620252,
+          "market_cap": 72535859374,
+          "data_source": "Binance Spot",
+          "candle_count": 60
+        },
+        "12h": {
+          "timeframe": "12h",
+          "timeframe_label": "12-Hour",
+          "rank": 7,
+          "name": "Solana",
+          "symbol": "SOL",
+          "binance_symbol": "SOLUSDT",
+          "current_price": 130.13,
+          "ema50": 150.47615831374821,
+          "above_ema50": false,
+          "pct_from_ema50": -13.521184047858098,
+          "market_cap": 72535859374,
+          "data_source": "Binance Spot",
+          "candle_count": 60
+        },
+        "1d": {
+          "timeframe": "1d",
+          "timeframe_label": "Daily",
+          "rank": 7,
+          "name": "Solana",
+          "symbol": "SOL",
+          "binance_symbol": "SOLUSDT",
+          "current_price": 130.13,
+          "ema50": 166.3032432153062,
+          "above_ema50": false,
+          "pct_from_ema50": -21.751375689332857,
+          "market_cap": 72535859374,
+          "data_source": "Binance Spot",
+          "candle_count": 60
+        },
+        "1w": {
+          "timeframe": "1w",
+          "timeframe_label": "Weekly",
+          "rank": 7,
+          "name": "Solana",
+          "symbol": "SOL",
+          "binance_symbol": "SOLUSDT",
+          "current_price": 130.13,
+          "ema50": 174.8156106246411,
+          "above_ema50": false,
+          "pct_from_ema50": -25.561567679781593,
+          "market_cap": 72535859374,
+          "data_source": "Binance Spot",
+          "candle_count": 60
+        }
+      }
+    },
+    {
+      "coin_info": {
+        "id": "tron",
+        "symbol": "trx",
+        "name": "TRON",
+        "image": "https://coin-images.coingecko.com/coins/images/1094/large/tron-logo.png?1696502193",
+        "current_price": 0.276291,
+        "market_cap": 26130230911,
+        "market_cap_rank": 8,
+        "fully_diluted_valuation": 26130235067,
+        "total_volume": 560702913,
+        "high_24h": 0.27733,
+        "low_24h": 0.274658,
+        "price_change_24h": 0.0012374,
+        "price_change_percentage_24h": 0.44988,
+        "market_cap_change_24h": 86637900,
+        "market_cap_change_percentage_24h": 0.33266,
+        "circulating_supply": 94677221887.7889,
+        "total_supply": 94677236947.4223,
+        "max_supply": null,
+        "ath": 0.431288,
+        "ath_change_percentage": -36.02239,
+        "ath_date": "2024-12-04T00:10:40.323Z",
+        "atl": 0.00180434,
+        "atl_change_percentage": 15192.44728,
+        "atl_date": "2017-11-12T00:00:00.000Z",
+        "roi": {
+          "times": 144.41623019189242,
+          "currency": "usd",
+          "percentage": 14441.623019189243
+        },
+        "last_updated": "2025-11-24T13:16:05.549Z"
+      },
+      "timeframes": {
+        "15m": {
+          "timeframe": "15m",
+          "timeframe_label": "15-Min",
+          "rank": 8,
+          "name": "TRON",
+          "symbol": "TRX",
+          "binance_symbol": "TRXUSDT",
+          "current_price": 0.2764,
+          "ema50": 0.2764556238387216,
+          "above_ema50": false,
+          "pct_from_ema50": -0.02012034985913204,
+          "market_cap": 26130230911,
+          "data_source": "Binance Spot",
+          "candle_count": 200
+        },
+        "30m": {
+          "timeframe": "30m",
+          "timeframe_label": "30-Min",
+          "rank": 8,
+          "name": "TRON",
+          "symbol": "TRX",
+          "binance_symbol": "TRXUSDT",
+          "current_price": 0.2764,
+          "ema50": 0.27609192632159496,
+          "above_ema50": true,
+          "pct_from_ema50": 0.11158373318246582,
+          "market_cap": 26130230911,
+          "data_source": "Binance Spot",
+          "candle_count": 200
+        },
+        "1h": {
+          "timeframe": "1h",
+          "timeframe_label": "1-Hour",
+          "rank": 8,
+          "name": "TRON",
+          "symbol": "TRX",
+          "binance_symbol": "TRXUSDT",
+          "current_price": 0.2764,
+          "ema50": 0.276106420096209,
+          "above_ema50": true,
+          "pct_from_ema50": 0.10632853219735969,
+          "market_cap": 26130230911,
+          "data_source": "Binance Spot",
+          "candle_count": 200
+        },
+        "4h": {
+          "timeframe": "4h",
+          "timeframe_label": "4-Hour",
+          "rank": 8,
+          "name": "TRON",
+          "symbol": "TRX",
+          "binance_symbol": "TRXUSDT",
+          "current_price": 0.2765,
+          "ema50": 0.28177363491186097,
+          "above_ema50": false,
+          "pct_from_ema50": -1.8715856483558317,
+          "market_cap": 26130230911,
+          "data_source": "Binance Spot",
+          "candle_count": 60
+        },
+        "12h": {
+          "timeframe": "12h",
+          "timeframe_label": "12-Hour",
+          "rank": 8,
+          "name": "TRON",
+          "symbol": "TRX",
+          "binance_symbol": "TRXUSDT",
+          "current_price": 0.2765,
+          "ema50": 0.2879108517228525,
+          "above_ema50": false,
+          "pct_from_ema50": -3.9633281116603287,
+          "market_cap": 26130230911,
+          "data_source": "Binance Spot",
+          "candle_count": 60
+        },
+        "1d": {
+          "timeframe": "1d",
+          "timeframe_label": "Daily",
+          "rank": 8,
+          "name": "TRON",
+          "symbol": "TRX",
+          "binance_symbol": "TRXUSDT",
+          "current_price": 0.2765,
+          "ema50": 0.30013223456317556,
+          "above_ema50": false,
+          "pct_from_ema50": -7.873940830637813,
+          "market_cap": 26130230911,
+          "data_source": "Binance Spot",
+          "candle_count": 60
+        },
+        "1w": {
+          "timeframe": "1w",
+          "timeframe_label": "Weekly",
+          "rank": 8,
+          "name": "TRON",
+          "symbol": "TRX",
+          "binance_symbol": "TRXUSDT",
+          "current_price": 0.2765,
+          "ema50": 0.2794960493234277,
+          "above_ema50": false,
+          "pct_from_ema50": -1.0719469311570486,
+          "market_cap": 26130230911,
+          "data_source": "Binance Spot",
+          "candle_count": 60
+        }
+      }
+    },
+    {
+      "coin_info": {
+        "id": "staked-ether",
+        "symbol": "steth",
+        "name": "Lido Staked Ether",
+        "image": "https://coin-images.coingecko.com/coins/images/13442/large/steth_logo.png?1696513206",
+        "current_price": 2813.98,
+        "market_cap": 24258755056,
+        "market_cap_rank": 9,
+        "fully_diluted_valuation": 24258755056,
+        "total_volume": 31624154,
+        "high_24h": 2877.63,
+        "low_24h": 2766.09,
+        "price_change_24h": -7.047671443708623,
+        "price_change_percentage_24h": -0.24983,
+        "market_cap_change_24h": -229180346.0931511,
+        "market_cap_change_percentage_24h": -0.93589,
+        "circulating_supply": 8629120.58565828,
+        "total_supply": 8629120.58565828,
+        "max_supply": null,
+        "ath": 4932.89,
+        "ath_change_percentage": -43.1696,
+        "ath_date": "2025-08-24T19:21:31.902Z",
+        "atl": 482.9,
+        "atl_change_percentage": 480.53538,
+        "atl_date": "2020-12-22T04:08:21.854Z",
+        "roi": null,
+        "last_updated": "2025-11-24T13:16:05.090Z"
+      },
+      "timeframes": {
+        "15m": null,
+        "30m": null,
+        "1h": null,
+        "4h": null,
+        "12h": null,
+        "1d": null,
+        "1w": null
+      }
+    },
+    {
+      "coin_info": {
+        "id": "dogecoin",
+        "symbol": "doge",
+        "name": "Dogecoin",
+        "image": "https://coin-images.coingecko.com/coins/images/5/large/dogecoin.png?1696501409",
+        "current_price": 0.14607,
+        "market_cap": 22074164785,
+        "market_cap_rank": 10,
+        "fully_diluted_valuation": 22079954173,
+        "total_volume": 1416532598,
+        "high_24h": 0.148935,
+        "low_24h": 0.143935,
+        "price_change_24h": 0.00156274,
+        "price_change_percentage_24h": 1.08143,
+        "market_cap_change_24h": 49186259,
+        "market_cap_change_percentage_24h": 0.22332,
+        "circulating_supply": 151866486383.7052,
+        "total_supply": 151906316383.7052,
+        "max_supply": null,
+        "ath": 0.731578,
+        "ath_change_percentage": -80.19183,
+        "ath_date": "2021-05-08T05:08:23.458Z",
+        "atl": 8.69e-05,
+        "atl_change_percentage": 166650.21865,
+        "atl_date": "2015-05-06T00:00:00.000Z",
+        "roi": null,
+        "last_updated": "2025-11-24T13:16:06.047Z"
+      },
+      "timeframes": {
+        "15m": {
+          "timeframe": "15m",
+          "timeframe_label": "15-Min",
+          "rank": 10,
+          "name": "Dogecoin",
+          "symbol": "DOGE",
+          "binance_symbol": "DOGEUSDT",
+          "current_price": 0.146,
+          "ema50": 0.1458063651610293,
+          "above_ema50": true,
+          "pct_from_ema50": 0.13280273378795587,
+          "market_cap": 22074164785,
+          "data_source": "Binance Spot",
+          "candle_count": 200
+        },
+        "30m": {
+          "timeframe": "30m",
+          "timeframe_label": "30-Min",
+          "rank": 10,
+          "name": "Dogecoin",
+          "symbol": "DOGE",
+          "binance_symbol": "DOGEUSDT",
+          "current_price": 0.146,
+          "ema50": 0.14540829912542294,
+          "above_ema50": true,
+          "pct_from_ema50": 0.4069237300318564,
+          "market_cap": 22074164785,
+          "data_source": "Binance Spot",
+          "candle_count": 200
+        },
+        "1h": {
+          "timeframe": "1h",
+          "timeframe_label": "1-Hour",
+          "rank": 10,
+          "name": "Dogecoin",
+          "symbol": "DOGE",
+          "binance_symbol": "DOGEUSDT",
+          "current_price": 0.146,
+          "ema50": 0.14472228851131727,
+          "above_ema50": true,
+          "pct_from_ema50": 0.8828712576520674,
+          "market_cap": 22074164785,
+          "data_source": "Binance Spot",
+          "candle_count": 200
+        },
+        "4h": {
+          "timeframe": "4h",
+          "timeframe_label": "4-Hour",
+          "rank": 10,
+          "name": "Dogecoin",
+          "symbol": "DOGE",
+          "binance_symbol": "DOGEUSDT",
+          "current_price": 0.146,
+          "ema50": 0.149448508229018,
+          "above_ema50": false,
+          "pct_from_ema50": -2.307489228151712,
+          "market_cap": 22074164785,
+          "data_source": "Binance Spot",
+          "candle_count": 60
+        },
+        "12h": {
+          "timeframe": "12h",
+          "timeframe_label": "12-Hour",
+          "rank": 10,
+          "name": "Dogecoin",
+          "symbol": "DOGE",
+          "binance_symbol": "DOGEUSDT",
+          "current_price": 0.14597,
+          "ema50": 0.16389167317834646,
+          "above_ema50": false,
+          "pct_from_ema50": -10.93507243583032,
+          "market_cap": 22074164785,
+          "data_source": "Binance Spot",
+          "candle_count": 60
+        },
+        "1d": {
+          "timeframe": "1d",
+          "timeframe_label": "Daily",
+          "rank": 10,
+          "name": "Dogecoin",
+          "symbol": "DOGE",
+          "binance_symbol": "DOGEUSDT",
+          "current_price": 0.14598,
+          "ema50": 0.18050043499187685,
+          "above_ema50": false,
+          "pct_from_ema50": -19.124848642846974,
+          "market_cap": 22074164785,
+          "data_source": "Binance Spot",
+          "candle_count": 60
+        },
+        "1w": {
+          "timeframe": "1w",
+          "timeframe_label": "Weekly",
+          "rank": 10,
+          "name": "Dogecoin",
+          "symbol": "DOGE",
+          "binance_symbol": "DOGEUSDT",
+          "current_price": 0.14598,
+          "ema50": 0.2043067000042101,
+          "above_ema50": false,
+          "pct_from_ema50": -28.548598750314202,
+          "market_cap": 22074164785,
+          "data_source": "Binance Spot",
+          "candle_count": 60
+        }
+      }
+    }
+  ],
+  "analysis": [
+    {
+      "rank": 1,
+      "name": "Bitcoin",
+      "symbol": "BTC",
+      "bullish_timeframes": 0,
+      "bearish_timeframes": 7,
+      "total_timeframes": 7,
+      "alignment_score": 100.0,
+      "primary_trend": "Bearish",
+      "timeframe_data": {
+        "15m": {
+          "pct": -0.31578918432687764,
+          "trend": "Neutral",
+          "above": false
+        },
+        "30m": {
+          "pct": -0.3281996305083672,
+          "trend": "Neutral",
+          "above": false
+        },
+        "1h": {
+          "pct": -0.11613649529470477,
+          "trend": "Neutral",
+          "above": false
+        },
+        "4h": {
+          "pct": -2.669321618901957,
+          "trend": "Neutral",
+          "above": false
+        },
+        "12h": {
+          "pct": -10.76992171403795,
+          "trend": "Bearish",
+          "above": false
+        },
+        "1d": {
+          "pct": -15.295343072314315,
+          "trend": "Bearish",
+          "above": false
+        },
+        "1w": {
+          "pct": -13.987005319437747,
+          "trend": "Bearish",
+          "above": false
+        }
+      }
+    },
+    {
+      "rank": 7,
+      "name": "Solana",
+      "symbol": "SOL",
+      "bullish_timeframes": 0,
+      "bearish_timeframes": 7,
+      "total_timeframes": 7,
+      "alignment_score": 100.0,
+      "primary_trend": "Bearish",
+      "timeframe_data": {
+        "15m": {
+          "pct": -0.2445991419602386,
+          "trend": "Neutral",
+          "above": false
+        },
+        "30m": {
+          "pct": -0.4019798210896765,
+          "trend": "Neutral",
+          "above": false
+        },
+        "1h": {
+          "pct": -0.2852712195901671,
+          "trend": "Neutral",
+          "above": false
+        },
+        "4h": {
+          "pct": -2.5490059340620252,
+          "trend": "Neutral",
+          "above": false
+        },
+        "12h": {
+          "pct": -13.521184047858098,
+          "trend": "Bearish",
+          "above": false
+        },
+        "1d": {
+          "pct": -21.751375689332857,
+          "trend": "Very Bearish",
+          "above": false
+        },
+        "1w": {
+          "pct": -25.561567679781593,
+          "trend": "Very Bearish",
+          "above": false
+        }
+      }
+    },
+    {
+      "rank": 5,
+      "name": "BNB",
+      "symbol": "BNB",
+      "bullish_timeframes": 1,
+      "bearish_timeframes": 6,
+      "total_timeframes": 7,
+      "alignment_score": 85.71428571428571,
+      "primary_trend": "Bearish",
+      "timeframe_data": {
+        "15m": {
+          "pct": -0.5469027746574873,
+          "trend": "Neutral",
+          "above": false
+        },
+        "30m": {
+          "pct": -0.5069986349852558,
+          "trend": "Neutral",
+          "above": false
+        },
+        "1h": {
+          "pct": -0.42363235583718417,
+          "trend": "Neutral",
+          "above": false
+        },
+        "4h": {
+          "pct": -3.426534368513698,
+          "trend": "Neutral",
+          "above": false
+        },
+        "12h": {
+          "pct": -10.665231666896467,
+          "trend": "Bearish",
+          "above": false
+        },
+        "1d": {
+          "pct": -14.669958866951468,
+          "trend": "Bearish",
+          "above": false
+        },
+        "1w": {
+          "pct": 3.6459610655297583,
+          "trend": "Neutral",
+          "above": true
+        }
+      }
+    },
+    {
+      "rank": 2,
+      "name": "Ethereum",
+      "symbol": "ETH",
+      "bullish_timeframes": 2,
+      "bearish_timeframes": 5,
+      "total_timeframes": 7,
+      "alignment_score": 71.42857142857143,
+      "primary_trend": "Bearish",
+      "timeframe_data": {
+        "15m": {
+          "pct": -0.019121716386703843,
+          "trend": "Neutral",
+          "above": false
+        },
+        "30m": {
+          "pct": 0.02668745285176216,
+          "trend": "Neutral",
+          "above": true
+        },
+        "1h": {
+          "pct": 0.1687051357067061,
+          "trend": "Neutral",
+          "above": true
+        },
+        "4h": {
+          "pct": -3.2613153380532873,
+          "trend": "Neutral",
+          "above": false
+        },
+        "12h": {
+          "pct": -13.187867765986304,
+          "trend": "Bearish",
+          "above": false
+        },
+        "1d": {
+          "pct": -19.60324757580216,
+          "trend": "Bearish",
+          "above": false
+        },
+        "1w": {
+          "pct": -14.109016687404537,
+          "trend": "Bearish",
+          "above": false
+        }
+      }
+    },
+    {
+      "rank": 8,
+      "name": "TRON",
+      "symbol": "TRX",
+      "bullish_timeframes": 2,
+      "bearish_timeframes": 5,
+      "total_timeframes": 7,
+      "alignment_score": 71.42857142857143,
+      "primary_trend": "Bearish",
+      "timeframe_data": {
+        "15m": {
+          "pct": -0.02012034985913204,
+          "trend": "Neutral",
+          "above": false
+        },
+        "30m": {
+          "pct": 0.11158373318246582,
+          "trend": "Neutral",
+          "above": true
+        },
+        "1h": {
+          "pct": 0.10632853219735969,
+          "trend": "Neutral",
+          "above": true
+        },
+        "4h": {
+          "pct": -1.8715856483558317,
+          "trend": "Neutral",
+          "above": false
+        },
+        "12h": {
+          "pct": -3.9633281116603287,
+          "trend": "Neutral",
+          "above": false
+        },
+        "1d": {
+          "pct": -7.873940830637813,
+          "trend": "Slightly Bearish",
+          "above": false
+        },
+        "1w": {
+          "pct": -1.0719469311570486,
+          "trend": "Neutral",
+          "above": false
+        }
+      }
+    },
+    {
+      "rank": 4,
+      "name": "XRP",
+      "symbol": "XRP",
+      "bullish_timeframes": 4,
+      "bearish_timeframes": 3,
+      "total_timeframes": 7,
+      "alignment_score": 57.14285714285714,
+      "primary_trend": "Bullish",
+      "timeframe_data": {
+        "15m": {
+          "pct": 1.0399212872111916,
+          "trend": "Neutral",
+          "above": true
+        },
+        "30m": {
+          "pct": 1.4484526931677146,
+          "trend": "Neutral",
+          "above": true
+        },
+        "1h": {
+          "pct": 2.3359322703600953,
+          "trend": "Neutral",
+          "above": true
+        },
+        "4h": {
+          "pct": 0.12993571307182503,
+          "trend": "Neutral",
+          "above": true
+        },
+        "12h": {
+          "pct": -7.145247878298271,
+          "trend": "Slightly Bearish",
+          "above": false
+        },
+        "1d": {
+          "pct": -12.038559908731674,
+          "trend": "Bearish",
+          "above": false
+        },
+        "1w": {
+          "pct": -10.037714642364296,
+          "trend": "Bearish",
+          "above": false
+        }
+      }
+    },
+    {
+      "rank": 6,
+      "name": "USDC",
+      "symbol": "USDC",
+      "bullish_timeframes": 3,
+      "bearish_timeframes": 4,
+      "total_timeframes": 7,
+      "alignment_score": 57.14285714285714,
+      "primary_trend": "Bearish",
+      "timeframe_data": {
+        "15m": {
+          "pct": 0.008645059083779372,
+          "trend": "Neutral",
+          "above": true
+        },
+        "30m": {
+          "pct": -0.0013128592630007763,
+          "trend": "Neutral",
+          "above": false
+        },
+        "1h": {
+          "pct": -0.0074078365544321696,
+          "trend": "Neutral",
+          "above": false
+        },
+        "4h": {
+          "pct": -0.026065389436400674,
+          "trend": "Neutral",
+          "above": false
+        },
+        "12h": {
+          "pct": -0.010880341878915666,
+          "trend": "Neutral",
+          "above": false
+        },
+        "1d": {
+          "pct": 0.01824945462463745,
+          "trend": "Neutral",
+          "above": true
+        },
+        "1w": {
+          "pct": 0.03207094996206213,
+          "trend": "Neutral",
+          "above": true
+        }
+      }
+    },
+    {
+      "rank": 10,
+      "name": "Dogecoin",
+      "symbol": "DOGE",
+      "bullish_timeframes": 3,
+      "bearish_timeframes": 4,
+      "total_timeframes": 7,
+      "alignment_score": 57.14285714285714,
+      "primary_trend": "Bearish",
+      "timeframe_data": {
+        "15m": {
+          "pct": 0.13280273378795587,
+          "trend": "Neutral",
+          "above": true
+        },
+        "30m": {
+          "pct": 0.4069237300318564,
+          "trend": "Neutral",
+          "above": true
+        },
+        "1h": {
+          "pct": 0.8828712576520674,
+          "trend": "Neutral",
+          "above": true
+        },
+        "4h": {
+          "pct": -2.307489228151712,
+          "trend": "Neutral",
+          "above": false
+        },
+        "12h": {
+          "pct": -10.93507243583032,
+          "trend": "Bearish",
+          "above": false
+        },
+        "1d": {
+          "pct": -19.124848642846974,
+          "trend": "Bearish",
+          "above": false
+        },
+        "1w": {
+          "pct": -28.548598750314202,
+          "trend": "Very Bearish",
+          "above": false
+        }
+      }
+    }
+  ],
+  "summary": {
+    "total_scanned": 10,
+    "coins_analyzed": 8
+  }
+}

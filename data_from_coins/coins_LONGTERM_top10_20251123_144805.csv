@@ -1,0 +1,4 @@
+rank,name,symbol,binance_symbol,current_price,ema50,above_ema50,pct_from_ema50,market_cap,timeframe,data_source,candle_count
+5,BNB,BNB,BNBUSDT,848.33,810.4844753532753,True,4.669494086265937,116888034971,Weekly,Binance Spot,60
+7,USDC,USDC,USDCUSDT,1.0002,0.999851284063255,True,0.0348767804075704,73970764020,Weekly,Binance Spot,60
+8,TRON,TRX,TRXUSDT,0.2753,0.2788466605250998,False,-1.27190353236473,26053276090,Weekly,Binance Spot,60
