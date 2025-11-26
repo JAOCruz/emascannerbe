@@ -5,6 +5,7 @@ Serves candle data instantly from database
 
 from flask import Flask, jsonify, request, Response
 from flask_cors import CORS
+from flask_cors import CORS
 import psycopg
 from psycopg.rows import dict_row
 import os
@@ -14,6 +15,7 @@ import threading
 import time
 
 app = Flask(__name__)
+CORS(app)  # Enable CORS for all routes
 CORS(app)
 
 # Database connection pool
@@ -37,12 +39,20 @@ scan_status = {
 @app.route('/health')
 def health():
     """Health check endpoint"""
+    print("🔍 Health check called")
+    print(f"DATABASE_URL present: {DATABASE_URL is not None}")
+    
     try:
+        print("Attempting database connection...")
         conn = get_db_connection()
+        print("Connection successful, executing query...")
         cur = conn.cursor()
         cur.execute("SELECT 1")
+        result = cur.fetchone()
+        print(f"Query result: {result}")
         cur.close()
         conn.close()
+        print("✅ Health check passed")
         
         return jsonify({
             'status': 'ok',
@@ -50,6 +60,9 @@ def health():
             'timestamp': datetime.now().isoformat()
         })
     except Exception as e:
+        print(f"❌ Health check failed: {e}")
+        import traceback
+        traceback.print_exc()
         return jsonify({
             'status': 'error',
             'database': 'disconnected',
@@ -205,6 +218,227 @@ def get_all_ema_analysis():
         })
         
     except Exception as e:
+        return jsonify({'error': str(e)}), 500
+
+@app.route('/api/coins/<symbol>/details')
+def get_coin_details(symbol):
+    """
+    Get comprehensive coin details including:
+    - Data coverage (candles per timeframe)
+    - EMA analysis across all timeframes
+    - Historical price range (5-year high/low)
+    - Data quality score
+    - Last update timestamp
+    """
+    try:
+        symbol = symbol.upper()
+        conn = get_db_connection()
+        cur = conn.cursor()
+        
+        # 1. Get coin basic info
+        cur.execute("""
+            SELECT symbol, name, market_cap_rank, current_price, 
+                   market_cap, binance_symbol, data_source, last_updated
+            FROM coins
+            WHERE symbol = %s
+        """, (symbol,))
+        
+        coin_info = cur.fetchone()
+        
+        if not coin_info:
+            cur.close()
+            conn.close()
+            return jsonify({'error': 'Coin not found'}), 404
+        
+        # 2. Get data coverage per timeframe
+        cur.execute("""
+            SELECT 
+                timeframe,
+                COUNT(*) as candle_count,
+                MIN(time) as earliest_candle,
+                MAX(time) as latest_candle
+            FROM candles
+            WHERE symbol = %s
+            GROUP BY timeframe
+            ORDER BY 
+                CASE timeframe
+                    WHEN '15m' THEN 1
+                    WHEN '1h' THEN 2
+                    WHEN '4h' THEN 3
+                    WHEN '1d' THEN 4
+                    WHEN '1w' THEN 5
+                END
+        """, (symbol,))
+        
+        coverage = cur.fetchall()
+        
+        # Calculate years of coverage and quality for each timeframe
+        coverage_data = []
+        total_quality = 0
+        
+        for tf in coverage:
+            earliest = tf['earliest_candle']
+            latest = tf['latest_candle']
+            candle_count = tf['candle_count']
+            
+            # Calculate years of data
+            if earliest and latest:
+                time_span = latest - earliest
+                years = time_span.days / 365.25
+            else:
+                years = 0
+            
+            # Calculate quality score (0-100)
+            # Based on how close to 5 years of data we have
+            expected_candles = {
+                '15m': 175200,  # 5 years
+                '1h': 43800,
+                '4h': 10950,
+                '1d': 1825,
+                '1w': 260
+            }
+            
+            expected = expected_candles.get(tf['timeframe'], 1000)
+            quality = min(100, int((candle_count / expected) * 100))
+            total_quality += quality
+            
+            # Quality label
+            if quality >= 90:
+                quality_label = "Excellent"
+                quality_color = "green"
+            elif quality >= 70:
+                quality_label = "Good"
+                quality_color = "cyan"
+            elif quality >= 50:
+                quality_label = "Fair"
+                quality_color = "yellow"
+            else:
+                quality_label = "Limited"
+                quality_color = "orange"
+            
+            coverage_data.append({
+                'timeframe': tf['timeframe'],
+                'candle_count': candle_count,
+                'earliest_candle': earliest.isoformat() if earliest else None,
+                'latest_candle': latest.isoformat() if latest else None,
+                'years_of_data': round(years, 2),
+                'quality_score': quality,
+                'quality_label': quality_label,
+                'quality_color': quality_color
+            })
+        
+        # Overall data quality score
+        overall_quality = int(total_quality / len(coverage)) if coverage else 0
+        
+        # 3. Get EMA analysis for all timeframes
+        cur.execute("""
+            SELECT DISTINCT ON (timeframe)
+                timeframe,
+                current_price,
+                ema50,
+                pct_from_ema50,
+                above_ema50,
+                analysis_date
+            FROM ema_analysis
+            WHERE symbol = %s
+            ORDER BY timeframe, analysis_date DESC
+        """, (symbol,))
+        
+        ema_analysis = cur.fetchall()
+        
+        # 4. Get historical price range (all-time or 5 years)
+        cur.execute("""
+            SELECT 
+                MIN(low) as all_time_low,
+                MAX(high) as all_time_high,
+                MIN(CASE WHEN time >= NOW() - INTERVAL '5 years' THEN low END) as five_year_low,
+                MAX(CASE WHEN time >= NOW() - INTERVAL '5 years' THEN high END) as five_year_high,
+                MIN(CASE WHEN time >= NOW() - INTERVAL '1 year' THEN low END) as one_year_low,
+                MAX(CASE WHEN time >= NOW() - INTERVAL '1 year' THEN high END) as one_year_high
+            FROM candles
+            WHERE symbol = %s AND timeframe = '1d'
+        """, (symbol,))
+        
+        price_range = cur.fetchone()
+        
+        # Calculate current price position
+        current_price = float(coin_info['current_price']) if coin_info['current_price'] else 0
+        
+        if price_range and price_range['five_year_low'] and price_range['five_year_high']:
+            five_year_range = float(price_range['five_year_high']) - float(price_range['five_year_low'])
+            if five_year_range > 0:
+                price_position = ((current_price - float(price_range['five_year_low'])) / five_year_range) * 100
+            else:
+                price_position = 50
+        else:
+            price_position = None
+        
+        # 5. Trading confidence score
+        # Based on: data quality + EMA trend alignment + price position
+        confidence_factors = []
+        
+        if overall_quality >= 80:
+            confidence_factors.append("Excellent data coverage")
+        elif overall_quality >= 60:
+            confidence_factors.append("Good data coverage")
+        else:
+            confidence_factors.append("Limited historical data")
+        
+        # Check EMA alignment across timeframes
+        if ema_analysis:
+            above_count = sum(1 for e in ema_analysis if e['above_ema50'])
+            ema_alignment = (above_count / len(ema_analysis)) * 100
+            
+            if ema_alignment >= 80:
+                confidence_factors.append("Strong bullish trend")
+            elif ema_alignment >= 60:
+                confidence_factors.append("Bullish momentum")
+            elif ema_alignment <= 20:
+                confidence_factors.append("Strong bearish trend")
+            elif ema_alignment <= 40:
+                confidence_factors.append("Bearish momentum")
+            else:
+                confidence_factors.append("Mixed signals")
+        
+        # Overall confidence
+        if overall_quality >= 80 and len(ema_analysis) >= 4:
+            confidence = "HIGH"
+            confidence_color = "green"
+        elif overall_quality >= 60 and len(ema_analysis) >= 3:
+            confidence = "MEDIUM"
+            confidence_color = "cyan"
+        else:
+            confidence = "LOW"
+            confidence_color = "orange"
+        
+        cur.close()
+        conn.close()
+        
+        return jsonify({
+            'coin_info': coin_info,
+            'data_coverage': coverage_data,
+            'overall_quality': overall_quality,
+            'ema_analysis': ema_analysis,
+            'price_range': {
+                'all_time_low': float(price_range['all_time_low']) if price_range and price_range['all_time_low'] else None,
+                'all_time_high': float(price_range['all_time_high']) if price_range and price_range['all_time_high'] else None,
+                'five_year_low': float(price_range['five_year_low']) if price_range and price_range['five_year_low'] else None,
+                'five_year_high': float(price_range['five_year_high']) if price_range and price_range['five_year_high'] else None,
+                'one_year_low': float(price_range['one_year_low']) if price_range and price_range['one_year_low'] else None,
+                'one_year_high': float(price_range['one_year_high']) if price_range and price_range['one_year_high'] else None,
+                'current_price': current_price,
+                'price_position_5y': round(price_position, 1) if price_position else None
+            },
+            'trading_confidence': {
+                'level': confidence,
+                'color': confidence_color,
+                'factors': confidence_factors
+            }
+        })
+        
+    except Exception as e:
+        import traceback
+        traceback.print_exc()
         return jsonify({'error': str(e)}), 500
 
 @app.route('/api/candles/<symbol>')
