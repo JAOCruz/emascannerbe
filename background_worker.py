@@ -8,7 +8,7 @@ from psycopg import sql
 import requests
 import pandas as pd
 import time
-from datetime import datetime, timedelta
+from datetime import datetime, timedelta, timezone
 import os
 import sys
 
@@ -74,7 +74,7 @@ def store_coins(coins):
                 coin.get('market_cap_rank', 0),
                 coin.get('market_cap', 0),
                 coin.get('current_price', 0),
-                datetime.now()
+                datetime.now(timezone.utc)
             ))
         except Exception as e:
             print(f"   ⚠️  Error storing {coin['symbol']}: {e}")
@@ -112,20 +112,23 @@ def calculate_candles_needed(timeframe, last_time=None):
     - If last_time exists: fetch only missing candles
     """
     if last_time is None:
-        # Initial population - fetch 5 YEARS for all timeframes
         return {
-            '15m': 175200,  # 5 years (365 * 5 * 24 * 4)
-            '1h': 43800,    # 5 years (365 * 5 * 24)
-            '4h': 10950,    # 5 years (365 * 5 * 6)
-            '1d': 1825,     # 5 years (365 * 5)
-            '1w': 260       # 5 years (52 * 5)
+            '15m': 175200,
+            '1h': 43800,
+            '4h': 10950,
+            '1d': 1825,
+            '1w': 260
         }.get(timeframe, 1000)
-    
-    # Calculate time since last candle
-    now = datetime.now()
+
+    # -----------------------------
+    # ✅ FIX: Ensure last_time is timezone-aware
+    # -----------------------------
+    if last_time.tzinfo is None:
+        last_time = last_time.replace(tzinfo=timezone.utc)
+
+    now = datetime.now(timezone.utc)
     time_diff = now - last_time
-    
-    # Add buffer to account for incomplete candles
+
     timeframe_minutes = {
         '15m': 15,
         '1h': 60,
@@ -137,8 +140,8 @@ def calculate_candles_needed(timeframe, last_time=None):
     minutes_elapsed = time_diff.total_seconds() / 60
     candles_behind = int(minutes_elapsed / timeframe_minutes.get(timeframe, 60))
     
-    # Add 2 candle buffer to ensure we don't miss any
     return max(candles_behind + 2, 2)
+
 
 def get_binance_candles(symbol, interval='1d', limit=100, start_time=None, end_time=None):
     """
@@ -217,7 +220,7 @@ def fetch_historical_batches(symbol, timeframe_config, total_candles_needed):
     binance_symbol = None
     data_source = None
     
-    end_time = datetime.now()
+    end_time = datetime.now(timezone.utc)
     batches_needed = (total_candles_needed + 999) // 1000  # Round up
     
     print(f"         📦 Fetching {batches_needed} batches ({total_candles_needed} candles total)")
@@ -430,7 +433,7 @@ def update_ema_analysis(symbol, timeframe):
             ema50,
             pct_from_ema,
             above_ema,
-            datetime.now().date()
+            datetime.now(timezone.utc).date()
         ))
         
         conn.commit()
@@ -524,7 +527,7 @@ def run_smart_update(coins, force_all=False):
     Run smart incremental update
     Only updates timeframes that need updating based on current time
     """
-    current_time = datetime.now()
+    current_time = datetime.now(timezone.utc)
     
     timeframes = {
         '15m': {'key': '15m', 'binance': '15m'},
@@ -609,7 +612,7 @@ def run_continuous_smart(top_n=200, check_interval_seconds=60):
             time.sleep(check_interval_seconds)
             
             # Check if any timeframe needs updating
-            current_time = datetime.now()
+            current_time = datetime.now(timezone.utc)
             print(f"\n⏰ Check at {current_time.strftime('%Y-%m-%d %H:%M:%S')}")
             
             start_time = time.time()
