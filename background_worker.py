@@ -8,7 +8,7 @@ from psycopg import sql
 import requests
 import pandas as pd
 import time
-from datetime import datetime, timedelta
+from datetime import datetime, timedelta, timezone
 import os
 import sys
 
@@ -261,7 +261,7 @@ def store_coins(coins):
                 coin.get('market_cap_rank', 0),
                 coin.get('market_cap', 0),
                 coin.get('current_price', 0),
-                datetime.now()
+                datetime.now(timezone.utc)
             ))
         except Exception as e:
             print(f"   ⚠️  Error storing {coin['symbol']}: {e}")
@@ -308,8 +308,14 @@ def calculate_candles_needed(timeframe, last_time=None):
             '1w': 260       # 5 years (52 * 5)
         }.get(timeframe, 1000)
     
+    # -----------------------------
+    # ✅ FIX: Ensure last_time is timezone-aware
+    # -----------------------------
+    if last_time.tzinfo is None:
+        last_time = last_time.replace(tzinfo=timezone.utc)
+    
     # Calculate time since last candle
-    now = datetime.now()
+    now = datetime.now(timezone.utc)
     time_diff = now - last_time
     
     # Add buffer to account for incomplete candles
@@ -404,7 +410,7 @@ def fetch_historical_batches(symbol, timeframe_config, total_candles_needed):
     binance_symbol = None
     data_source = None
     
-    end_time = datetime.now()
+    end_time = datetime.now(timezone.utc)
     batches_needed = (total_candles_needed + 999) // 1000  # Round up
     
     print(f"         📦 Fetching {batches_needed} batches ({total_candles_needed} candles total)")
@@ -617,7 +623,7 @@ def update_ema_analysis(symbol, timeframe):
             ema50,
             pct_from_ema,
             above_ema,
-            datetime.now().date()
+            datetime.now(timezone.utc).date()
         ))
         
         conn.commit()
@@ -711,7 +717,7 @@ def run_smart_update(coins, force_all=False):
     Run smart incremental update
     Only updates timeframes that need updating based on current time
     """
-    current_time = datetime.now()
+    current_time = datetime.now(timezone.utc)
     
     timeframes = {
         '15m': {'key': '15m', 'binance': '15m'},
