@@ -8,7 +8,7 @@ from psycopg import sql
 import requests
 import pandas as pd
 import time
-from datetime import datetime, timedelta, timezone
+from datetime import datetime, timedelta
 import os
 import sys
 
@@ -18,14 +18,42 @@ def get_db_connection():
     """Get database connection"""
     return psycopg.connect(DATABASE_URL)
 
+def get_binance_trading_pairs():
+    """Get all USDT trading pairs from Binance"""
+    try:
+        url = "https://api.binance.com/api/v3/exchangeInfo"
+        response = requests.get(url, timeout=10)
+        response.raise_for_status()
+        data = response.json()
+        
+        # Get all USDT pairs
+        usdt_symbols = []
+        for symbol_info in data['symbols']:
+            if (symbol_info['symbol'].endswith('USDT') and 
+                symbol_info['status'] == 'TRADING' and
+                symbol_info['quoteAsset'] == 'USDT'):
+                # Remove USDT suffix to get base symbol
+                base_symbol = symbol_info['symbol'][:-4]
+                usdt_symbols.append(base_symbol)
+        
+        print(f"   📊 Found {len(usdt_symbols)} tradable pairs on Binance")
+        return set(usdt_symbols)
+    except Exception as e:
+        print(f"   ⚠️  Error fetching Binance pairs: {e}")
+        return set()
+
 def get_top_coins(limit=200):
-    """Fetch top N coins from CoinGecko"""
+    """Fetch top N coins from CoinGecko that are also on Binance"""
     print(f"📊 Fetching top {limit} coins...")
+    
+    # Get Binance trading pairs first
+    binance_symbols = get_binance_trading_pairs()
     
     url = "https://api.coingecko.com/api/v3/coins/markets"
     all_coins = []
     
-    pages = (limit + 49) // 50
+    # Fetch more pages to ensure we get enough Binance-listed coins
+    pages = ((limit * 2) + 49) // 50  # Fetch 2x to account for filtering
     
     for page in range(1, pages + 1):
         params = {
@@ -40,14 +68,26 @@ def get_top_coins(limit=200):
             response = requests.get(url, params=params, timeout=10)
             response.raise_for_status()
             coins = response.json()
-            all_coins.extend(coins)
+            
+            # Only keep coins that are on Binance
+            for coin in coins:
+                symbol = coin['symbol'].upper()
+                if symbol in binance_symbols:
+                    all_coins.append(coin)
+                    if len(all_coins) >= limit:
+                        break
+            
+            if len(all_coins) >= limit:
+                break
+                
             time.sleep(1)
         except Exception as e:
             print(f"   ⚠️  Error fetching page {page}: {e}")
             continue
     
-    print(f"   ✅ Got {len(all_coins)} coins")
-    return all_coins[:limit]
+    filtered_coins = all_coins[:limit]
+    print(f"   ✅ Got {len(filtered_coins)} coins (filtered to Binance-listed only)")
+    return filtered_coins
 
 def store_coins(coins):
     """Store coin metadata in database"""
@@ -74,7 +114,7 @@ def store_coins(coins):
                 coin.get('market_cap_rank', 0),
                 coin.get('market_cap', 0),
                 coin.get('current_price', 0),
-                datetime.now(timezone.utc)
+                datetime.now()
             ))
         except Exception as e:
             print(f"   ⚠️  Error storing {coin['symbol']}: {e}")
@@ -112,23 +152,20 @@ def calculate_candles_needed(timeframe, last_time=None):
     - If last_time exists: fetch only missing candles
     """
     if last_time is None:
+        # Initial population - fetch 5 YEARS for all timeframes
         return {
-            '15m': 175200,
-            '1h': 43800,
-            '4h': 10950,
-            '1d': 1825,
-            '1w': 260
+            '15m': 175200,  # 5 years (365 * 5 * 24 * 4)
+            '1h': 43800,    # 5 years (365 * 5 * 24)
+            '4h': 10950,    # 5 years (365 * 5 * 6)
+            '1d': 1825,     # 5 years (365 * 5)
+            '1w': 260       # 5 years (52 * 5)
         }.get(timeframe, 1000)
-
-    # -----------------------------
-    # ✅ FIX: Ensure last_time is timezone-aware
-    # -----------------------------
-    if last_time.tzinfo is None:
-        last_time = last_time.replace(tzinfo=timezone.utc)
-
-    now = datetime.now(timezone.utc)
+    
+    # Calculate time since last candle
+    now = datetime.now()
     time_diff = now - last_time
-
+    
+    # Add buffer to account for incomplete candles
     timeframe_minutes = {
         '15m': 15,
         '1h': 60,
@@ -140,8 +177,8 @@ def calculate_candles_needed(timeframe, last_time=None):
     minutes_elapsed = time_diff.total_seconds() / 60
     candles_behind = int(minutes_elapsed / timeframe_minutes.get(timeframe, 60))
     
+    # Add 2 candle buffer to ensure we don't miss any
     return max(candles_behind + 2, 2)
-
 
 def get_binance_candles(symbol, interval='1d', limit=100, start_time=None, end_time=None):
     """
@@ -220,7 +257,7 @@ def fetch_historical_batches(symbol, timeframe_config, total_candles_needed):
     binance_symbol = None
     data_source = None
     
-    end_time = datetime.now(timezone.utc)
+    end_time = datetime.now()
     batches_needed = (total_candles_needed + 999) // 1000  # Round up
     
     print(f"         📦 Fetching {batches_needed} batches ({total_candles_needed} candles total)")
@@ -433,7 +470,7 @@ def update_ema_analysis(symbol, timeframe):
             ema50,
             pct_from_ema,
             above_ema,
-            datetime.now(timezone.utc).date()
+            datetime.now().date()
         ))
         
         conn.commit()
@@ -527,7 +564,7 @@ def run_smart_update(coins, force_all=False):
     Run smart incremental update
     Only updates timeframes that need updating based on current time
     """
-    current_time = datetime.now(timezone.utc)
+    current_time = datetime.now()
     
     timeframes = {
         '15m': {'key': '15m', 'binance': '15m'},
@@ -612,7 +649,7 @@ def run_continuous_smart(top_n=200, check_interval_seconds=60):
             time.sleep(check_interval_seconds)
             
             # Check if any timeframe needs updating
-            current_time = datetime.now(timezone.utc)
+            current_time = datetime.now()
             print(f"\n⏰ Check at {current_time.strftime('%Y-%m-%d %H:%M:%S')}")
             
             start_time = time.time()
