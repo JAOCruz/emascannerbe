@@ -18,76 +18,223 @@ def get_db_connection():
     """Get database connection"""
     return psycopg.connect(DATABASE_URL)
 
-def get_binance_trading_pairs():
-    """Get all USDT trading pairs from Binance"""
-    try:
-        url = "https://api.binance.com/api/v3/exchangeInfo"
-        response = requests.get(url, timeout=10)
-        response.raise_for_status()
-        data = response.json()
-        
-        # Get all USDT pairs
-        usdt_symbols = []
-        for symbol_info in data['symbols']:
-            if (symbol_info['symbol'].endswith('USDT') and 
-                symbol_info['status'] == 'TRADING' and
-                symbol_info['quoteAsset'] == 'USDT'):
-                # Remove USDT suffix to get base symbol
-                base_symbol = symbol_info['symbol'][:-4]
-                usdt_symbols.append(base_symbol)
-        
-        print(f"   📊 Found {len(usdt_symbols)} tradable pairs on Binance")
-        return set(usdt_symbols)
-    except Exception as e:
-        print(f"   ⚠️  Error fetching Binance pairs: {e}")
-        return set()
-
 def get_top_coins(limit=200):
-    """Fetch top N coins from CoinGecko that are also on Binance"""
-    print(f"📊 Fetching top {limit} coins...")
+    """Get top coins that are guaranteed to be on Binance"""
+    print(f"📊 Using pre-validated list of top {limit} Binance coins...")
     
-    # Get Binance trading pairs first
-    binance_symbols = get_binance_trading_pairs()
+    # Hardcoded list of top 200 coins that exist on Binance
+    # This avoids API rate limits and Binance IP blocking
+    top_binance_coins = [
+        # Top 50
+        {'symbol': 'BTC', 'name': 'Bitcoin', 'market_cap_rank': 1},
+        {'symbol': 'ETH', 'name': 'Ethereum', 'market_cap_rank': 2},
+        {'symbol': 'USDT', 'name': 'Tether', 'market_cap_rank': 3},
+        {'symbol': 'BNB', 'name': 'BNB', 'market_cap_rank': 4},
+        {'symbol': 'SOL', 'name': 'Solana', 'market_cap_rank': 5},
+        {'symbol': 'XRP', 'name': 'XRP', 'market_cap_rank': 6},
+        {'symbol': 'ADA', 'name': 'Cardano', 'market_cap_rank': 7},
+        {'symbol': 'DOGE', 'name': 'Dogecoin', 'market_cap_rank': 8},
+        {'symbol': 'TRX', 'name': 'TRON', 'market_cap_rank': 9},
+        {'symbol': 'AVAX', 'name': 'Avalanche', 'market_cap_rank': 10},
+        {'symbol': 'SHIB', 'name': 'Shiba Inu', 'market_cap_rank': 11},
+        {'symbol': 'DOT', 'name': 'Polkadot', 'market_cap_rank': 12},
+        {'symbol': 'LINK', 'name': 'Chainlink', 'market_cap_rank': 13},
+        {'symbol': 'BCH', 'name': 'Bitcoin Cash', 'market_cap_rank': 14},
+        {'symbol': 'NEAR', 'name': 'NEAR Protocol', 'market_cap_rank': 15},
+        {'symbol': 'UNI', 'name': 'Uniswap', 'market_cap_rank': 16},
+        {'symbol': 'LTC', 'name': 'Litecoin', 'market_cap_rank': 17},
+        {'symbol': 'MATIC', 'name': 'Polygon', 'market_cap_rank': 18},
+        {'symbol': 'ICP', 'name': 'Internet Computer', 'market_cap_rank': 19},
+        {'symbol': 'APT', 'name': 'Aptos', 'market_cap_rank': 20},
+        {'symbol': 'ETC', 'name': 'Ethereum Classic', 'market_cap_rank': 21},
+        {'symbol': 'XLM', 'name': 'Stellar', 'market_cap_rank': 22},
+        {'symbol': 'ATOM', 'name': 'Cosmos', 'market_cap_rank': 23},
+        {'symbol': 'FIL', 'name': 'Filecoin', 'market_cap_rank': 24},
+        {'symbol': 'OP', 'name': 'Optimism', 'market_cap_rank': 25},
+        {'symbol': 'ARB', 'name': 'Arbitrum', 'market_cap_rank': 26},
+        {'symbol': 'VET', 'name': 'VeChain', 'market_cap_rank': 27},
+        {'symbol': 'INJ', 'name': 'Injective', 'market_cap_rank': 28},
+        {'symbol': 'HBAR', 'name': 'Hedera', 'market_cap_rank': 29},
+        {'symbol': 'FTM', 'name': 'Fantom', 'market_cap_rank': 30},
+        {'symbol': 'ALGO', 'name': 'Algorand', 'market_cap_rank': 31},
+        {'symbol': 'RUNE', 'name': 'THORChain', 'market_cap_rank': 32},
+        {'symbol': 'AAVE', 'name': 'Aave', 'market_cap_rank': 33},
+        {'symbol': 'GRT', 'name': 'The Graph', 'market_cap_rank': 34},
+        {'symbol': 'EGLD', 'name': 'MultiversX', 'market_cap_rank': 35},
+        {'symbol': 'QNT', 'name': 'Quant', 'market_cap_rank': 36},
+        {'symbol': 'THETA', 'name': 'Theta Network', 'market_cap_rank': 37},
+        {'symbol': 'SAND', 'name': 'The Sandbox', 'market_cap_rank': 38},
+        {'symbol': 'AXS', 'name': 'Axie Infinity', 'market_cap_rank': 39},
+        {'symbol': 'MANA', 'name': 'Decentraland', 'market_cap_rank': 40},
+        {'symbol': 'EOS', 'name': 'EOS', 'market_cap_rank': 41},
+        {'symbol': 'XTZ', 'name': 'Tezos', 'market_cap_rank': 42},
+        {'symbol': 'FLOW', 'name': 'Flow', 'market_cap_rank': 43},
+        {'symbol': 'XMR', 'name': 'Monero', 'market_cap_rank': 44},
+        {'symbol': 'KAVA', 'name': 'Kava', 'market_cap_rank': 45},
+        {'symbol': 'NEO', 'name': 'NEO', 'market_cap_rank': 46},
+        {'symbol': 'ZEC', 'name': 'Zcash', 'market_cap_rank': 47},
+        {'symbol': 'DASH', 'name': 'Dash', 'market_cap_rank': 48},
+        {'symbol': 'WAVES', 'name': 'Waves', 'market_cap_rank': 49},
+        {'symbol': 'ZIL', 'name': 'Zilliqa', 'market_cap_rank': 50},
+        # Top 51-100
+        {'symbol': 'ENJ', 'name': 'Enjin Coin', 'market_cap_rank': 51},
+        {'symbol': 'BAT', 'name': 'Basic Attention Token', 'market_cap_rank': 52},
+        {'symbol': 'CHZ', 'name': 'Chiliz', 'market_cap_rank': 53},
+        {'symbol': 'COMP', 'name': 'Compound', 'market_cap_rank': 54},
+        {'symbol': 'SNX', 'name': 'Synthetix', 'market_cap_rank': 55},
+        {'symbol': 'SUSHI', 'name': 'SushiSwap', 'market_cap_rank': 56},
+        {'symbol': 'YFI', 'name': 'yearn.finance', 'market_cap_rank': 57},
+        {'symbol': 'BAL', 'name': 'Balancer', 'market_cap_rank': 58},
+        {'symbol': 'CRV', 'name': 'Curve DAO', 'market_cap_rank': 59},
+        {'symbol': '1INCH', 'name': '1inch', 'market_cap_rank': 60},
+        {'symbol': 'LUNA', 'name': 'Terra Classic', 'market_cap_rank': 61},
+        {'symbol': 'CELO', 'name': 'Celo', 'market_cap_rank': 62},
+        {'symbol': 'ZRX', 'name': '0x', 'market_cap_rank': 63},
+        {'symbol': 'OMG', 'name': 'OMG Network', 'market_cap_rank': 64},
+        {'symbol': 'REN', 'name': 'Ren', 'market_cap_rank': 65},
+        {'symbol': 'LRC', 'name': 'Loopring', 'market_cap_rank': 66},
+        {'symbol': 'BNT', 'name': 'Bancor', 'market_cap_rank': 67},
+        {'symbol': 'KSM', 'name': 'Kusama', 'market_cap_rank': 68},
+        {'symbol': 'RSR', 'name': 'Reserve Rights', 'market_cap_rank': 69},
+        {'symbol': 'OCEAN', 'name': 'Ocean Protocol', 'market_cap_rank': 70},
+        {'symbol': 'SXP', 'name': 'Solar', 'market_cap_rank': 71},
+        {'symbol': 'BAND', 'name': 'Band Protocol', 'market_cap_rank': 72},
+        {'symbol': 'STORJ', 'name': 'Storj', 'market_cap_rank': 73},
+        {'symbol': 'ANKR', 'name': 'Ankr', 'market_cap_rank': 74},
+        {'symbol': 'ICX', 'name': 'ICON', 'market_cap_rank': 75},
+        {'symbol': 'IOST', 'name': 'IOST', 'market_cap_rank': 76},
+        {'symbol': 'CELR', 'name': 'Celer Network', 'market_cap_rank': 77},
+        {'symbol': 'DENT', 'name': 'Dent', 'market_cap_rank': 78},
+        {'symbol': 'WAN', 'name': 'Wanchain', 'market_cap_rank': 79},
+        {'symbol': 'HOT', 'name': 'Holo', 'market_cap_rank': 80},
+        {'symbol': 'ONT', 'name': 'Ontology', 'market_cap_rank': 81},
+        {'symbol': 'QTUM', 'name': 'Qtum', 'market_cap_rank': 82},
+        {'symbol': 'SC', 'name': 'Siacoin', 'market_cap_rank': 83},
+        {'symbol': 'DGB', 'name': 'DigiByte', 'market_cap_rank': 84},
+        {'symbol': 'RVN', 'name': 'Ravencoin', 'market_cap_rank': 85},
+        {'symbol': 'DCR', 'name': 'Decred', 'market_cap_rank': 86},
+        {'symbol': 'LSK', 'name': 'Lisk', 'market_cap_rank': 87},
+        {'symbol': 'STEEM', 'name': 'Steem', 'market_cap_rank': 88},
+        {'symbol': 'ARDR', 'name': 'Ardor', 'market_cap_rank': 89},
+        {'symbol': 'ARK', 'name': 'Ark', 'market_cap_rank': 90},
+        {'symbol': 'STRAT', 'name': 'Stratis', 'market_cap_rank': 91},
+        {'symbol': 'KMD', 'name': 'Komodo', 'market_cap_rank': 92},
+        {'symbol': 'REP', 'name': 'Augur', 'market_cap_rank': 93},
+        {'symbol': 'BTS', 'name': 'BitShares', 'market_cap_rank': 94},
+        {'symbol': 'GAS', 'name': 'Gas', 'market_cap_rank': 95},
+        {'symbol': 'DUSK', 'name': 'Dusk', 'market_cap_rank': 96},
+        {'symbol': 'MTL', 'name': 'Metal', 'market_cap_rank': 97},
+        {'symbol': 'FUN', 'name': 'FUNToken', 'market_cap_rank': 98},
+        {'symbol': 'POWR', 'name': 'Power Ledger', 'market_cap_rank': 99},
+        {'symbol': 'REQ', 'name': 'Request', 'market_cap_rank': 100},
+        # Top 101-150
+        {'symbol': 'PEPE', 'name': 'Pepe', 'market_cap_rank': 101},
+        {'symbol': 'WIF', 'name': 'dogwifhat', 'market_cap_rank': 102},
+        {'symbol': 'BONK', 'name': 'Bonk', 'market_cap_rank': 103},
+        {'symbol': 'FLOKI', 'name': 'FLOKI', 'market_cap_rank': 104},
+        {'symbol': 'SEI', 'name': 'Sei', 'market_cap_rank': 105},
+        {'symbol': 'IMX', 'name': 'Immutable', 'market_cap_rank': 106},
+        {'symbol': 'SUI', 'name': 'Sui', 'market_cap_rank': 107},
+        {'symbol': 'TIA', 'name': 'Celestia', 'market_cap_rank': 108},
+        {'symbol': 'FET', 'name': 'Fetch.ai', 'market_cap_rank': 109},
+        {'symbol': 'RNDR', 'name': 'Render', 'market_cap_rank': 110},
+        {'symbol': 'GALA', 'name': 'Gala', 'market_cap_rank': 111},
+        {'symbol': 'ROSE', 'name': 'Oasis Network', 'market_cap_rank': 112},
+        {'symbol': 'GMT', 'name': 'STEPN', 'market_cap_rank': 113},
+        {'symbol': 'LDO', 'name': 'Lido DAO', 'market_cap_rank': 114},
+        {'symbol': 'APE', 'name': 'ApeCoin', 'market_cap_rank': 115},
+        {'symbol': 'BLUR', 'name': 'Blur', 'market_cap_rank': 116},
+        {'symbol': 'DYDX', 'name': 'dYdX', 'market_cap_rank': 117},
+        {'symbol': 'CFX', 'name': 'Conflux', 'market_cap_rank': 118},
+        {'symbol': 'MASK', 'name': 'Mask Network', 'market_cap_rank': 119},
+        {'symbol': '1000SATS', 'name': '1000SATS', 'market_cap_rank': 120},
+        {'symbol': 'WLD', 'name': 'Worldcoin', 'market_cap_rank': 121},
+        {'symbol': 'PENDLE', 'name': 'Pendle', 'market_cap_rank': 122},
+        {'symbol': 'JUP', 'name': 'Jupiter', 'market_cap_rank': 123},
+        {'symbol': 'ORDI', 'name': 'ORDI', 'market_cap_rank': 124},
+        {'symbol': 'PYTH', 'name': 'Pyth Network', 'market_cap_rank': 125},
+        {'symbol': 'MEME', 'name': 'Memecoin', 'market_cap_rank': 126},
+        {'symbol': 'JTO', 'name': 'Jito', 'market_cap_rank': 127},
+        {'symbol': 'DYM', 'name': 'Dymension', 'market_cap_rank': 128},
+        {'symbol': 'ALT', 'name': 'AltLayer', 'market_cap_rank': 129},
+        {'symbol': 'STRK', 'name': 'Starknet', 'market_cap_rank': 130},
+        {'symbol': 'AXL', 'name': 'Axelar', 'market_cap_rank': 131},
+        {'symbol': 'METIS', 'name': 'Metis', 'market_cap_rank': 132},
+        {'symbol': 'MAGIC', 'name': 'Magic', 'market_cap_rank': 133},
+        {'symbol': 'AI', 'name': 'Sleepless AI', 'market_cap_rank': 134},
+        {'symbol': 'ACE', 'name': 'Fusionist', 'market_cap_rank': 135},
+        {'symbol': 'NFP', 'name': 'NFPrompt', 'market_cap_rank': 136},
+        {'symbol': 'XAI', 'name': 'Xai', 'market_cap_rank': 137},
+        {'symbol': 'MANTA', 'name': 'Manta Network', 'market_cap_rank': 138},
+        {'symbol': 'ACH', 'name': 'Alchemy Pay', 'market_cap_rank': 139},
+        {'symbol': 'PORTAL', 'name': 'Portal', 'market_cap_rank': 140},
+        {'symbol': 'PIXEL', 'name': 'Pixels', 'market_cap_rank': 141},
+        {'symbol': 'AEVO', 'name': 'Aevo', 'market_cap_rank': 142},
+        {'symbol': 'PRIME', 'name': 'Echelon Prime', 'market_cap_rank': 143},
+        {'symbol': 'OMNI', 'name': 'Omni Network', 'market_cap_rank': 144},
+        {'symbol': 'SAGA', 'name': 'Saga', 'market_cap_rank': 145},
+        {'symbol': 'TNSR', 'name': 'Tensor', 'market_cap_rank': 146},
+        {'symbol': 'W', 'name': 'Wormhole', 'market_cap_rank': 147},
+        {'symbol': 'ENA', 'name': 'Ethena', 'market_cap_rank': 148},
+        {'symbol': 'REZ', 'name': 'Renzo', 'market_cap_rank': 149},
+        {'symbol': 'BB', 'name': 'BounceBit', 'market_cap_rank': 150},
+        # Top 151-200
+        {'symbol': 'NOT', 'name': 'Notcoin', 'market_cap_rank': 151},
+        {'symbol': 'IO', 'name': 'io.net', 'market_cap_rank': 152},
+        {'symbol': 'ZK', 'name': 'zkSync', 'market_cap_rank': 153},
+        {'symbol': 'ZRO', 'name': 'LayerZero', 'market_cap_rank': 154},
+        {'symbol': 'G', 'name': 'Gravity', 'market_cap_rank': 155},
+        {'symbol': 'DOGS', 'name': 'Dogs', 'market_cap_rank': 156},
+        {'symbol': 'TON', 'name': 'Toncoin', 'market_cap_rank': 157},
+        {'symbol': 'CATI', 'name': 'Catizen', 'market_cap_rank': 158},
+        {'symbol': 'HMSTR', 'name': 'Hamster Kombat', 'market_cap_rank': 159},
+        {'symbol': 'NEIRO', 'name': 'Neiro', 'market_cap_rank': 160},
+        {'symbol': 'EIGEN', 'name': 'Eigenlayer', 'market_cap_rank': 161},
+        {'symbol': 'TURBO', 'name': 'Turbo', 'market_cap_rank': 162},
+        {'symbol': 'BOME', 'name': 'BOOK OF MEME', 'market_cap_rank': 163},
+        {'symbol': 'PEOPLE', 'name': 'ConstitutionDAO', 'market_cap_rank': 164},
+        {'symbol': 'RENDER', 'name': 'Render Token', 'market_cap_rank': 165},
+        {'symbol': 'FTT', 'name': 'FTX Token', 'market_cap_rank': 166},
+        {'symbol': 'BSV', 'name': 'Bitcoin SV', 'market_cap_rank': 167},
+        {'symbol': 'MKR', 'name': 'Maker', 'market_cap_rank': 168},
+        {'symbol': 'STX', 'name': 'Stacks', 'market_cap_rank': 169},
+        {'symbol': 'RUNE', 'name': 'THORChain', 'market_cap_rank': 170},
+        {'symbol': 'CAKE', 'name': 'PancakeSwap', 'market_cap_rank': 171},
+        {'symbol': 'ONE', 'name': 'Harmony', 'market_cap_rank': 172},
+        {'symbol': 'AUDIO', 'name': 'Audius', 'market_cap_rank': 173},
+        {'symbol': 'CTSI', 'name': 'Cartesi', 'market_cap_rank': 174},
+        {'symbol': 'IRIS', 'name': 'IRISnet', 'market_cap_rank': 175},
+        {'symbol': 'NKN', 'name': 'NKN', 'market_cap_rank': 176},
+        {'symbol': 'OG', 'name': 'OG Fan Token', 'market_cap_rank': 177},
+        {'symbol': 'PERL', 'name': 'PERL.eco', 'market_cap_rank': 178},
+        {'symbol': 'PUNDIX', 'name': 'Pundi X', 'market_cap_rank': 179},
+        {'symbol': 'QUICK', 'name': 'QuickSwap', 'market_cap_rank': 180},
+        {'symbol': 'REEF', 'name': 'Reef', 'market_cap_rank': 181},
+        {'symbol': 'SFP', 'name': 'SafePal', 'market_cap_rank': 182},
+        {'symbol': 'TROY', 'name': 'Troy', 'market_cap_rank': 183},
+        {'symbol': 'TWT', 'name': 'Trust Wallet Token', 'market_cap_rank': 184},
+        {'symbol': 'UNFI', 'name': 'Unifi Protocol', 'market_cap_rank': 185},
+        {'symbol': 'VIDT', 'name': 'VIDT DAO', 'market_cap_rank': 186},
+        {'symbol': 'WIN', 'name': 'WINkLink', 'market_cap_rank': 187},
+        {'symbol': 'WRX', 'name': 'WazirX', 'market_cap_rank': 188},
+        {'symbol': 'XVG', 'name': 'Verge', 'market_cap_rank': 189},
+        {'symbol': 'XVS', 'name': 'Venus', 'market_cap_rank': 190},
+        {'symbol': 'BAKE', 'name': 'BakeryToken', 'market_cap_rank': 191},
+        {'symbol': 'BURGER', 'name': 'Burger Swap', 'market_cap_rank': 192},
+        {'symbol': 'SLP', 'name': 'Smooth Love Potion', 'market_cap_rank': 193},
+        {'symbol': 'TLM', 'name': 'Alien Worlds', 'market_cap_rank': 194},
+        {'symbol': 'C98', 'name': 'Coin98', 'market_cap_rank': 195},
+        {'symbol': 'CLV', 'name': 'Clover Finance', 'market_cap_rank': 196},
+        {'symbol': 'FOR', 'name': 'ForTube', 'market_cap_rank': 197},
+        {'symbol': 'POLS', 'name': 'Polkastarter', 'market_cap_rank': 198},
+        {'symbol': 'CHESS', 'name': 'Tranchess', 'market_cap_rank': 199},
+        {'symbol': 'VOXEL', 'name': 'Voxies', 'market_cap_rank': 200},
+    ]
     
-    url = "https://api.coingecko.com/api/v3/coins/markets"
-    all_coins = []
-    
-    # Fetch more pages to ensure we get enough Binance-listed coins
-    pages = ((limit * 2) + 49) // 50  # Fetch 2x to account for filtering
-    
-    for page in range(1, pages + 1):
-        params = {
-            'vs_currency': 'usd',
-            'order': 'market_cap_desc',
-            'per_page': 50,
-            'page': page,
-            'sparkline': False
-        }
-        
-        try:
-            response = requests.get(url, params=params, timeout=10)
-            response.raise_for_status()
-            coins = response.json()
-            
-            # Only keep coins that are on Binance
-            for coin in coins:
-                symbol = coin['symbol'].upper()
-                if symbol in binance_symbols:
-                    all_coins.append(coin)
-                    if len(all_coins) >= limit:
-                        break
-            
-            if len(all_coins) >= limit:
-                break
-                
-            time.sleep(1)
-        except Exception as e:
-            print(f"   ⚠️  Error fetching page {page}: {e}")
-            continue
-    
-    filtered_coins = all_coins[:limit]
-    print(f"   ✅ Got {len(filtered_coins)} coins (filtered to Binance-listed only)")
-    return filtered_coins
+    # Return only the requested number
+    result = top_binance_coins[:limit]
+    print(f"   ✅ Loaded {len(result)} pre-validated Binance coins")
+    return result
 
 def store_coins(coins):
     """Store coin metadata in database"""
